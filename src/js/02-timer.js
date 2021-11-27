@@ -36,7 +36,7 @@ class Timer {
     this.onTick = onTick;
   }
 
-  start() {
+  start = () => {
     const futureTime = new Date();
 
     setInterval(() => {
@@ -45,13 +45,13 @@ class Timer {
 
       this.onTick(deltaTime);
     }, 1000);
-  }
+  };
 
-  addLeadingZero(value) {
+  addLeadingZero = value => {
     return String(value).padStart(2, '0');
-  }
+  };
 
-  convertMs(ms) {
+  convertMs = ms => {
     const second = 1000;
     const minute = second * 60;
     const hour = minute * 60;
@@ -63,7 +63,7 @@ class Timer {
     const seconds = this.addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
 
     return { days, hours, minutes, seconds };
-  }
+  };
 }
 
 const timer = new Timer({ onTick: updateClockface });
