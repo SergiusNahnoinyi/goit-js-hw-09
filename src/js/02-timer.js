@@ -13,18 +13,21 @@ const spanSeconds = document.querySelector('span[data-seconds]');
 
 startButton.setAttribute('disabled', true);
 
+let futureTime = 0;
+
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
+    futureTime = selectedDates[0];
     const currentTime = Date.now();
-    if (currentTime >= selectedDates[0]) {
+    if (currentTime >= futureTime) {
       alert('Please choose a date in the future');
     } else {
       startButton.removeAttribute('disabled');
-      console.log(selectedDates[0]);
+      console.log(futureTime);
     }
   },
 };
@@ -37,8 +40,6 @@ class Timer {
   }
 
   start = () => {
-    const futureTime = new Date();
-
     setInterval(() => {
       const currentTime = Date.now();
       const deltaTime = this.convertMs(futureTime - currentTime);
